@@ -7,6 +7,7 @@
                     <div>a = <input/></div>
                     <div>b = <input/></div>
                 </form>
+                <div class="plus-btn"><img src="../assets/Plus.svg"></div>
             </div>
             <div class="content-cont-calc-result">
                 <div>
@@ -27,19 +28,51 @@
 
 </script>
 <style scoped>
+    .plus-btn{
+        margin-top: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        background: linear-gradient(90deg, rgba(204,155,255,1) 0%, rgba(214,177,253,1) 100%);
+        box-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+    .plus-btn img{
+        width: 60%;
+        height: 60%;
+    }
     h2, h1, h3{
     font-weight: 400;
     }
     .content-cont-calc-var{
         display: flex;
         flex-direction: column;
-        width: 40%;
+        width: 20%;
         height: 90%;
-        border: 2px solid red;
     }
     .content-cont-calc-var form{
         display: flex;
         flex-direction: column;
+        gap: 10px;
+    }
+    .content-cont-calc-var form div{
+        height: 2rem;
+        color: #676767;
+        font-size: 1.7rem;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    .content-cont-calc-var form div input{
+        margin-left: 5px;
+        height: 1.7rem;
+        background-color: #FFFFFF;
+        border: 0;
+        box-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.25);
+        border-radius: 10px;
     }
     .content-cont-calc-result{
         justify-content: space-evenly;
@@ -47,8 +80,7 @@
         flex-direction: column;
         display: flex;
         height: 90%;
-        width: 50%;
-        border: 2px solid green;
+        width: 70%;
     }
     .content-cont-calc-result div{
         box-sizing: border-box;
@@ -65,9 +97,10 @@
         color: white;
         align-self: flex-end;
         margin-right: 5%;
-        width: 30%;
+        width: 20%;
         height: 10%;
         background: linear-gradient(90deg, rgba(204,155,255,1) 0%, rgba(214,177,253,1) 100%);
+        box-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.25);
         border: none;
         border-radius: 30px;
     }
