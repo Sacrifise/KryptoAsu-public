@@ -7,11 +7,11 @@
         <h2 class="navBar-cont-user"> <img src="../assets/Generic avatar.svg">Nick</h2>
         <div class="navBar-cont-routes">
             <h2>CALCULATION</h2>
-            <div class="text"> <img class="icon" src="../assets/Box.svg">Nok</div>
+            <div class="text unselected"> <img class="icon" src="../assets/Box.svg">Nok</div>
             <div class="text selected"> <img class="icon" src="../assets/Octagon.svg">Nod</div>
-            <div class="text"> <img class="icon" src="../assets/Cpu.svg">Abs</div>
+            <div class="text unselected"> <img class="icon" src="../assets/Cpu.svg">Abs</div>
             <h2>RESULTS</h2>
-            <div class="text"> <img class="icon" src="../assets/Rotate ccw.svg">Recent</div>
+            <div class="text unselected"> <img class="icon" src="../assets/Rotate ccw.svg">Recent</div>
         </div>
     </div>
 </template>
@@ -59,6 +59,51 @@
     top: 13px;
     left: 0;
     pointer-events: none; 
+}
+.unselected::before {
+    transform: translateX(-200px);
+    transition: 0.3s;
+    z-index: -2 ;
+    content: "";
+    position: absolute;
+    height: 80%;
+    width: 100%; 
+    background-color: #ffa4d7;
+    border-radius: 0 30px 30px 0;
+    top: 13px;
+    left: 0;
+    pointer-events: none; 
+}
+.unselected::after{
+    transform: translateX(-200px);
+    transition: 0.3s;
+    z-index: -1 ;
+    content: "";
+    position: absolute;
+    height: 80%;
+    width: 100%; 
+    background-color: #ff95d1;
+    border-radius: 0 30px 30px 0;
+    top: calc(0 - 20%);
+    left: 0;
+    pointer-events: none; 
+}
+.unselected{
+    transition: 0.3s;
+    position: relative;
+    z-index: 1;
+}
+.unselected:hover::after, .unselected:hover::before{
+    transform: translateX(-10px);
+}
+.unselected:hover{
+    color: #b7568d;
+}
+.unselected img{
+    transition: 0.1s;
+}
+.unselected:hover img{
+    filter: brightness(0) saturate(100%) invert(36%) sepia(100%) saturate(400%) hue-rotate(270deg) brightness(100%) contrast(100%) ;
 }
 .navBar-cont-user{
     display: flex;
