@@ -25,7 +25,17 @@
     position: relative;
     z-index: 1;
 }
+.selected:hover::after{
+    transform: translateY(3px);
+    background-color: #dec0ff;
+    filter: drop-shadow(0 0px 5px #d5aaff);
+}
+.selected:hover::before{
+    background-color: #d5aaff;
+    filter: drop-shadow(0 0px 5px #d5aaff);
+}
 .selected::before {
+    transition: 0.3s;
     z-index: -1 ;
     content: "";
     position: absolute;
@@ -38,6 +48,7 @@
     pointer-events: none; 
 }
 .selected::after {
+    transition: 0.3s;
     z-index: -2 ;
     content: "";
     position: absolute;
@@ -57,7 +68,7 @@
 }
 .navBar-cont-routes{
     align-self: flex-start;
-    width: 85%;
+    width: 60%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

@@ -29,6 +29,7 @@
 </script>
 <style scoped>
     .plus-btn{
+        transition: 0.4s;
         margin-top: 20px;
         width: 60px;
         height: 60px;
@@ -41,8 +42,16 @@
         align-self: center;
     }
     .plus-btn img{
+        transition: 0.4s;
         width: 60%;
         height: 60%;
+    }
+    .plus-btn:hover{
+        box-shadow: 0 0 20px 0px #d5aaff;
+    }
+    .plus-btn:active, .plus-btn:active img{
+        transition-duration: 0s;
+        filter: brightness(0.9);
     }
     h2, h1, h3{
     font-weight: 400;
@@ -92,7 +101,15 @@
         box-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.25);
         border-radius: 30px;
     }
+    .content-cont-calc-result button:hover{
+        box-shadow: 0 0 20px 0px #d5aaff;
+    }
+    .content-cont-calc-result button:active{
+        filter: brightness(0.9);
+        transition-duration: 0s;
+    }
     .content-cont-calc-result button{
+        transition: 0.4s;
         font-size: 1.2rem;
         color: white;
         align-self: flex-end;
