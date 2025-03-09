@@ -33,7 +33,7 @@
         margin-top: 20px;
         width: 60px;
         height: 60px;
-        border-radius: 30px;
+        border-radius: 40px;
         background: linear-gradient(90deg, rgba(204,155,255,1) 0%, rgba(214,177,253,1) 100%);
         box-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.25);
         display: flex;
@@ -48,6 +48,8 @@
     }
     .plus-btn:hover{
         box-shadow: 0 0 20px 0px #d5aaff;
+        width: 70px;
+        height: 70px;
     }
     .plus-btn:active, .plus-btn:active img{
         transition-duration: 0s;
@@ -114,7 +116,7 @@
         color: white;
         align-self: flex-end;
         margin-right: 5%;
-        width: 20%;
+        width: 15%;
         height: 10%;
         background: linear-gradient(90deg, rgba(204,155,255,1) 0%, rgba(214,177,253,1) 100%);
         box-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.25);
