@@ -6,8 +6,9 @@
                 <form>
                     <div>a = <input/></div>
                     <div>b = <input/></div>
+                    <div v-for="item, index in variables" :key="index">{{ item }} = <input/></div>
                 </form>
-                <div class="plus-btn"><img src="../assets/Plus.svg"></div>
+                <div class="plus-btn" :class="{ none: isPlusHidden }" @click="createVar()"><img src="../assets/Plus.svg"></div>
             </div>
             <div class="content-cont-calc-result">
                 <div>
@@ -25,9 +26,35 @@
 </template>
 
 <script setup>
+import { ref,  watch} from 'vue';
+let counter = 99;
+function createVar(){
+    variables.value.push(String.fromCharCode(counter))
+    counter += 1;
+    
+}
+
+const model = ref();
+const variables = ref([]);
+const isPlusHidden = ref(false);
+
+
+
+
+watch(variables, (newValue) => {
+    if (newValue.length >= 6) {
+        console.log("POP!");
+        isPlusHidden.value = true;
+        console.log(isPlusHidden.value)
+    }
+}, { deep: true });
 
 </script>
+
 <style scoped>
+    .none{
+        display: none !important;
+    }
     .plus-btn{
         transition: 0.4s;
         margin-top: 20px;
@@ -61,13 +88,13 @@
     .content-cont-calc-var{
         display: flex;
         flex-direction: column;
-        width: 20%;
+        width: 25%;
         height: 90%;
     }
     .content-cont-calc-var form{
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
     }
     .content-cont-calc-var form div{
         height: 2rem;
@@ -75,6 +102,7 @@
         font-size: 1.7rem;
         display: flex;
         align-items: center;
+        justify-content: center;
         box-sizing: border-box;
     }
     .content-cont-calc-var form div input{
@@ -91,7 +119,7 @@
         flex-direction: column;
         display: flex;
         height: 90%;
-        width: 70%;
+        width: 65%;
     }
     .content-cont-calc-result div{
         box-sizing: border-box;
