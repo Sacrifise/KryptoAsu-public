@@ -3,11 +3,13 @@
         <div class="content-cont-calc">
             <div class="content-cont-calc-var">
                 <h2>INPUT DATA</h2>
-                <form>
-                    <div>a = <input/></div>
-                    <div>b = <input/></div>
+                <form class="content-cont-calc-var-form" @submit="submitForm($event)">
+                    <div>a = <input type="number" name="a"/></div>
+                    <div>b = <input type="number" name="b"/></div>
+                    <div v-for="item, index in variables" :key="index" >{{ item }} = <input :name="item" type="number"/></div>
+                    <button type="submit">submit</button>
                 </form>
-                <div class="plus-btn"><img src="../assets/Plus.svg"></div>
+                <div class="plus-btn" :class="{ none: isPlusHidden }" @click="createVar()"><img src="../assets/Plus.svg"></div>
             </div>
             <div class="content-cont-calc-result">
                 <div>
@@ -25,9 +27,60 @@
 </template>
 
 <script setup>
+import { ref,  watch} from 'vue';
+
+let counter = 99;
+function createVar(){
+    variables.value.push(String.fromCharCode(counter))
+    counter += 1;
+    
+}
+
+function submitForm(e){
+    e.preventDefault();
+    inputData.value = [];
+    e.target.querySelectorAll("input").forEach((el) => inputData.value.push(el.value))
+    dataPostCall(inputData)
+    inputData.value = inputData.value.filter((el) => el != "")
+    console.log(inputData.value)
+    dataPostCall(inputData)
+}
+
+async function dataPostCall(content) {
+    await fetch('http://192.168.0.102:8000/Operations/LCM', {
+        method: "POST",
+        body: JSON.stringify(content),
+    
+    
+        headers: {
+            "Content-type": "application/json"
+        }
+    
+    
+    }).then(res => res.json()).then(json =>  console.log(json));
+}
+
+const model = ref();
+const variables = ref([]);
+const isPlusHidden = ref(false);
+const inputData = ref([])
+
+
+
+watch(variables, (newValue) => {
+    if (newValue.length >= 6) {
+        console.log("POP!");
+        isPlusHidden.value = true;
+        console.log(isPlusHidden.value)
+    }
+}, { deep: true });
 
 </script>
+
 <style scoped>
+    .none{
+        display: none !important;
+    }
     .plus-btn{
         transition: 0.4s;
         margin-top: 20px;
@@ -61,13 +114,13 @@
     .content-cont-calc-var{
         display: flex;
         flex-direction: column;
-        width: 20%;
+        width: 25%;
         height: 90%;
     }
     .content-cont-calc-var form{
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
     }
     .content-cont-calc-var form div{
         height: 2rem;
@@ -75,6 +128,7 @@
         font-size: 1.7rem;
         display: flex;
         align-items: center;
+        justify-content: center;
         box-sizing: border-box;
     }
     .content-cont-calc-var form div input{
@@ -91,7 +145,7 @@
         flex-direction: column;
         display: flex;
         height: 90%;
-        width: 70%;
+        width: 65%;
     }
     .content-cont-calc-result div{
         box-sizing: border-box;
