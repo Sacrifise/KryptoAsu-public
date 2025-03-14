@@ -3,11 +3,10 @@
         <div class="content-cont-calc">
             <div class="content-cont-calc-var">
                 <h2>INPUT DATA</h2>
-                <form class="content-cont-calc-var-form" @submit="submitForm($event)">
+                <form class="content-cont-calc-var-form" ref="formSub">
                     <div>a = <input type="number" name="a"/></div>
                     <div>b = <input type="number" name="b"/></div>
                     <div v-for="item, index in variables" :key="index" >{{ item }} = <input :name="item" type="number"/></div>
-                    <button type="submit">submit</button>
                 </form>
                 <div class="plus-btn" :class="{ none: isPlusHidden }" @click="createVar()"><img src="../assets/Plus.svg"></div>
             </div>
@@ -15,7 +14,7 @@
                 <div>
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus totam, veritatis perspiciatis molestias beatae asperiores dignissimos. Ipsa exercitationem illo, accusamus eius, voluptatibus ut, iste minus architecto explicabo aliquid soluta commodi!
                 </div>
-                <button>SOLVE</button>
+                <button @click="submitForm($event)">SOLVE</button>
             </div>
         </div>
         <div class="content-cont-example">
@@ -39,39 +38,41 @@ function createVar(){
 function submitForm(e){
     e.preventDefault();
     inputData.value = [];
-    e.target.querySelectorAll("input").forEach((el) => inputData.value.push(el.value))
-    dataPostCall(inputData)
+    formSub.value.querySelectorAll("input").forEach((el) => inputData.value.push(el.value))
     inputData.value = inputData.value.filter((el) => el != "")
-    console.log(inputData.value)
-    dataPostCall(inputData)
+    dataPostCall({value: Array.from(inputData.value)})
 }
 
 async function dataPostCall(content) {
-    await fetch('http://192.168.0.102:8000/Operations/LCM', {
+    await fetch('http://localhost:8000/Operations/LCM', {
         method: "POST",
         body: JSON.stringify(content),
-    
-    
         headers: {
             "Content-type": "application/json"
         }
     
     
-    }).then(res => res.json()).then(json =>  console.log(json));
+    }).then(res => res.json()).then(json => console.log(json));
+    dataGetCall()
 }
 
+async function dataGetCall() {
+    try {
+        await fetch('http://localhost:8000/GET').then((el) => el.json()).then((e) => console.log(e));
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+const formSub = ref(null)
 const model = ref();
 const variables = ref([]);
 const isPlusHidden = ref(false);
 const inputData = ref([])
 
-
-
 watch(variables, (newValue) => {
     if (newValue.length >= 6) {
         console.log("POP!");
         isPlusHidden.value = true;
-        console.log(isPlusHidden.value)
     }
 }, { deep: true });
 
