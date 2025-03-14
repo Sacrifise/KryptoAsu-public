@@ -3,10 +3,11 @@
         <div class="content-cont-calc">
             <div class="content-cont-calc-var">
                 <h2>INPUT DATA</h2>
-                <form>
-                    <div>a = <input/></div>
-                    <div>b = <input/></div>
-                    <div v-for="item, index in variables" :key="index">{{ item }} = <input/></div>
+                <form class="content-cont-calc-var-form" @submit="submitForm($event)">
+                    <div>a = <input type="number" name="a"/></div>
+                    <div>b = <input type="number" name="b"/></div>
+                    <div v-for="item, index in variables" :key="index" >{{ item }} = <input :name="item" type="number"/></div>
+                    <button type="submit">submit</button>
                 </form>
                 <div class="plus-btn" :class="{ none: isPlusHidden }" @click="createVar()"><img src="../assets/Plus.svg"></div>
             </div>
@@ -27,6 +28,7 @@
 
 <script setup>
 import { ref,  watch} from 'vue';
+
 let counter = 99;
 function createVar(){
     variables.value.push(String.fromCharCode(counter))
@@ -34,10 +36,34 @@ function createVar(){
     
 }
 
+function submitForm(e){
+    e.preventDefault();
+    inputData.value = [];
+    e.target.querySelectorAll("input").forEach((el) => inputData.value.push(el.value))
+    dataPostCall(inputData)
+    inputData.value = inputData.value.filter((el) => el != "")
+    console.log(inputData.value)
+    dataPostCall(inputData)
+}
+
+async function dataPostCall(content) {
+    await fetch('http://192.168.0.102:8000/Operations/LCM', {
+        method: "POST",
+        body: JSON.stringify(content),
+    
+    
+        headers: {
+            "Content-type": "application/json"
+        }
+    
+    
+    }).then(res => res.json()).then(json =>  console.log(json));
+}
+
 const model = ref();
 const variables = ref([]);
 const isPlusHidden = ref(false);
-
+const inputData = ref([])
 
 
 
