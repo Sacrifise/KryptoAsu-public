@@ -3,16 +3,24 @@
         <div class="content-cont-calc">
             <div class="content-cont-calc-var">
                 <h2>INPUT DATA</h2>
-                <form class="content-cont-calc-var-form" ref="formSub">
+
+                <form v-if="props.type ==='Nok' || props.type ==='Nod'" class="content-cont-calc-var-form" ref="formSub">
                     <div>a = <input type="number" name="a"/></div>
                     <div>b = <input type="number" name="b"/></div>
                     <div v-for="item, index in variables" :key="index" >{{ item }} = <input :name="item" type="number"/></div>
                 </form>
-                <div class="plus-btn" :class="{ none: isPlusHidden }" @click="createVar()"><img src="../assets/Plus.svg"></div>
+
+                <form v-if="props.type ==='Abs'" class="content-cont-calc-var-form" ref="formSub">
+                    <div>a = <input type="number" name="a"/></div>
+                    <div>b = <input type="number" name="b"/></div>
+                    <div>c = <input type="number" name="c"/></div>
+                </form>
+
+                <div v-if="props.type !='Abs'" class="plus-btn" :class="{ none: isPlusHidden }" @click="createVar()"><img src="../assets/Plus.svg"></div>
             </div>
             <div class="content-cont-calc-result">
                 <div>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus totam, veritatis perspiciatis molestias beatae asperiores dignissimos. Ipsa exercitationem illo, accusamus eius, voluptatibus ut, iste minus architecto explicabo aliquid soluta commodi!
+                    Решение: {{ resultData }}
                 </div>
                 <button @click="submitForm($event)">SOLVE</button>
             </div>
@@ -26,13 +34,24 @@
 </template>
 
 <script setup>
-import { ref,  watch} from 'vue';
+import { ref,  watch, defineProps } from 'vue';
+
+const props = defineProps({
+    type: String,
+    url: String
+})
 
 let counter = 99;
+const formSub = ref(null)
+const resultData = ref("");
+const variables = ref([]);
+const isPlusHidden = ref(false);
+const inputData = ref([])
+
+
 function createVar(){
     variables.value.push(String.fromCharCode(counter))
     counter += 1;
-    
 }
 
 function submitForm(e){
@@ -44,7 +63,7 @@ function submitForm(e){
 }
 
 async function dataPostCall(content) {
-    await fetch('http://localhost:8000/Operations/LCM', {
+    await fetch(`http://localhost:8000${props.url}`, {
         method: "POST",
         body: JSON.stringify(content),
         headers: {
@@ -58,16 +77,14 @@ async function dataPostCall(content) {
 
 async function dataGetCall() {
     try {
-        await fetch('http://localhost:8000/GET').then((el) => el.json()).then((e) => console.log(e));
+        await fetch('http://localhost:8000/GET').then((el) => el.json()).then((e) => {resultData.value = e.results;});
     } catch (error) {
         console.error('Error:', error);
     }
+    
 }
-const formSub = ref(null)
-const model = ref();
-const variables = ref([]);
-const isPlusHidden = ref(false);
-const inputData = ref([])
+
+
 
 watch(variables, (newValue) => {
     if (newValue.length >= 6) {

@@ -15,6 +15,7 @@ origins = [
     "http://localhost",
     "http://localhost:5173",
     "http://192.168.0.106:5173/",
+    "http://192.168.1.176:5173/"
 ]
 
 app.add_middleware(
@@ -38,9 +39,7 @@ class GCD_LCM(BaseModel):
         return val
 
 class ABS_crypto(BaseModel):
-    value_a: int
-    value_b: int
-    value_n: int
+    value: List[int]
     
 def extended_gcd(a, b):
     """Расширенный алгоритм Евклида для нахождения НОД и коэффициентов Безу."""
@@ -85,16 +84,16 @@ def solve_congruence(a, b, m):
     summary="Модуль"
 )
 def GCD(response: ABS_crypto):
-    result = solve_congruence(response.value_a, response.value_b, response.value_n)
+    result = solve_congruence(response.value[0], response.value[1], response.value[2])
     if result is None:
         result = "Решений нет"
     else:
-        result = f"Решения уравнения {response.value_a}x ≡ {response.value_b} (mod {response.value_n}): {result}"
+        result = f"Решения уравнения {response.value[0]}x ≡ {response.value[1]} (mod {response.value[2]}): {result}"
     results.append(
         {
-            "value_a": response.value_a,
-            "value_b": response.value_b,
-            "value_n": response.value_n,
+            "value_a": response.value[0],
+            "value_b": response.value[1],
+            "value_n": response.value[2],
             "results": result
             
         }
