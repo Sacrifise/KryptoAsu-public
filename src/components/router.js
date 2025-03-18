@@ -14,7 +14,6 @@ const routes = [
         path: "/nok",
         name: "Nok",
         component: Nok,
-        props: {page: 1}
     },
     {
         path: "/nod",

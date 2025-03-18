@@ -5,22 +5,22 @@
                 <h2>INPUT DATA</h2>
 
                 <form v-if="props.type ==='Nok' || props.type ==='Nod'" class="content-cont-calc-var-form" ref="formSub">
-                    <div>a = <input type="number" name="a"/></div>
-                    <div>b = <input type="number" name="b"/></div>
-                    <div v-for="item, index in variables" :key="index" >{{ item }} = <input :name="item" type="number"/></div>
+                    <div class="">a = <input type="number" name="a"/></div>
+                    <div class="">b = <input type="number" name="b"/></div>
+                    <div class="calc-var-form-value" v-for="item, index in variables" :key="index" >{{ item }} = <input :name="item" type="number"/></div>
                 </form>
 
                 <form v-if="props.type ==='Abs'" class="content-cont-calc-var-form" ref="formSub">
-                    <div>a = <input type="number" name="a"/></div>
-                    <div>b = <input type="number" name="b"/></div>
-                    <div>c = <input type="number" name="c"/></div>
+                    <div class="">a = <input type="number" name="a"/></div>
+                    <div class="">b = <input type="number" name="b"/></div>
+                    <div class="">c = <input type="number" name="c"/></div>
                 </form>
 
                 <div v-if="props.type !='Abs'" class="plus-btn" :class="{ none: isPlusHidden }" @click="createVar()"><img src="../assets/Plus.svg"></div>
             </div>
-            <div class="content-cont-calc-result">
-                <div>
-                    Решение: {{ resultData }}
+            <div class="content-cont-calc-result ">
+                <div ref="resSub" class="">
+                    <span  >Решение: {{ resultData }}</span>
                 </div>
                 <button @click="submitForm($event)">SOLVE</button>
             </div>
@@ -43,6 +43,7 @@ const props = defineProps({
 
 let counter = 99;
 const formSub = ref(null)
+const resSub = ref(null)
 const resultData = ref("");
 const variables = ref([]);
 const isPlusHidden = ref(false);
@@ -76,12 +77,13 @@ async function dataPostCall(content) {
 }
 
 async function dataGetCall() {
+    resSub.value.classList.remove("name")
     try {
-        await fetch('http://localhost:8000/GET').then((el) => el.json()).then((e) => {resultData.value = e.results;});
+        await fetch('http://localhost:8000/GET').then((el) => el.json()).then((e) => {resultData.value = e.results; resSub.value.classList.add("name")});
     } catch (error) {
         console.error('Error:', error);
     }
-    
+    setTimeout(() => resSub.value.classList.remove("name"), 1000)
 }
 
 
@@ -96,6 +98,63 @@ watch(variables, (newValue) => {
 </script>
 
 <style scoped>
+    .name{
+        animation: new-result 1s 1 alternate;
+        transform-origin: -20% 0;
+    }
+
+    .calc-var-form-value{
+        animation: birth 1s 1 alternate;
+    }
+    @keyframes birth {
+        from{
+            opacity: 0;
+            transform: scale(1.4);
+        }
+        30%{
+            opacity: 1;
+            transform: scale(1.4) rotate(2deg);
+        }
+        80%{
+            opacity: 1;
+            transform: scale(0.9) rotate(-2deg);
+        }
+        to{
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+    }
+    @keyframes new-result {
+        from{
+            opacity: 0;
+            transform: scale(1.0);
+        }
+        40%{
+            opacity: 1;
+            transform: scale(1.1) rotate(-5deg);
+        }
+        50%{
+            opacity: 1;
+            transform: scale(1.1) rotate(2.5deg);
+        }
+        60%{
+            opacity: 1;
+            transform: scale(1.1) rotate(-2.5deg);
+        }
+        70%{
+            opacity: 1;
+            transform: scale(1.1) rotate(1.25deg);
+        }
+        80%{
+            opacity: 1;
+            transform: scale(0.9) rotate(-1.25deg);
+        }
+        to{
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+    }
+
     .none{
         display: none !important;
     }
