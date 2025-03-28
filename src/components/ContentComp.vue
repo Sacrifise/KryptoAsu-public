@@ -3,7 +3,6 @@
         <div class="content-cont-calc">
             <div class="content-cont-calc-var">
                 <h2>INPUT DATA</h2>
-
                 <form v-if="props.type ==='Nok' || props.type ==='Nod'" class="content-cont-calc-var-form" ref="formSub">
                     <div class="">a = <input type="number" name="a"/></div>
                     <div class="">b = <input type="number" name="b"/></div>
@@ -106,27 +105,34 @@ watch(variables, (newValue) => {
     .calc-var-form-value{
         animation: birth 1s 1 alternate;
     }
+    @keyframes result {
+        from{
+            transform: scale(1);
+        }
+        33%{
+            transform: scale(0.95);
+        }
+        66%{
+            transform: scale(1.05);
+        }
+        to{
+            transform: scale(1);
+        }
+        
+    }
     @keyframes birth {
         from{
             opacity: 0;
             transform: scale(1.4);
         }
-        30%{
-            opacity: 1;
-            transform: scale(1.4) rotate(2deg);
-        }
-        80%{
-            opacity: 1;
-            transform: scale(0.9) rotate(-2deg);
-        }
         to{
             opacity: 1;
-            transform: scale(1) rotate(0deg);
+            transform: scale(1);
         }
     }
     @keyframes new-result {
         from{
-            opacity: 0;
+            opacity: 1;
             transform: scale(1.0);
         }
         40%{
