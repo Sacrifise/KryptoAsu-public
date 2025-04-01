@@ -14,7 +14,7 @@ origins = [
     "https://localhost.tiangolo.com",
     "http://localhost",
     "http://localhost:5173",
-    "http://192.168.0.106:5173/",
+    "http://192.168.0.110:3000",
 ]
 
 app.add_middleware(
@@ -84,7 +84,7 @@ def solve_congruence(a, b, m):
     tags=["Operations"],
     summary="Модуль"
 )
-def GCD(response: ABS_crypto):
+def ABS(response: ABS_crypto):
     result = solve_congruence(response.value_a, response.value_b, response.value_n)
     if result is None:
         result = "Решений нет"
@@ -156,6 +156,6 @@ def get_previous():
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", reload=True)
+    uvicorn.run("testcopy:app", reload=True)
 
 
