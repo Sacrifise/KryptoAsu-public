@@ -13,9 +13,7 @@ origins = [
     "http://localhost",
     "http://localhost:5173/",
     "http://localhost:5173",
-    "http://192.168.0.110:5173/",
-    "http://192.168.1.176:5173/",
-    "http://192.168.0.110:5173"
+    "http://192.168.0.106:5173/",
 ]
 
 app.add_middleware(
@@ -84,7 +82,7 @@ def solve_congruence(a, b, m):
     summary="Модуль"
 )
 def GCD(response: ABS_crypto):
-    result = solve_congruence(response.value[0], response.value[1], response.value[2])
+    result = solve_congruence(response.value_a, response.value_b, response.value_n)
     if result is None:
         result = "Решений нет"
     else:
@@ -155,6 +153,6 @@ def get_previous():
 
 
 if __name__ == "__main__":
-    uvicorn.run("testcopy:app", reload=True, host="0.0.0.0", port=8000)
+    uvicorn.run("main:app", reload=True)
 
 
