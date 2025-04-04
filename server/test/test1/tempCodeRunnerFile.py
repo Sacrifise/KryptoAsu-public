@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Depends
 from contextlib import asynccontextmanager
 from database import create_tables, delete_tables
-from routers import post_router
-from routers import get_rout
+from routers import post_router as p_rout
+from routers import get_rout as g_rout
 from typing import List
 
 @asynccontextmanager
@@ -19,5 +19,5 @@ async def get_results() -> List[dict]:
     return results
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(post_router)
-app.include_router(get_rout)
+app.include_router(p_rout)
+app.include_router(g_rout)
