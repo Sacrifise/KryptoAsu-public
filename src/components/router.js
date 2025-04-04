@@ -11,6 +11,26 @@ const routes = [
         component: false
     },
     {
+        path: "/atbash",
+        name: "Atbash",
+        component: Recent
+    },
+    {
+        path: "/caesar",
+        name: "Caesar",
+        component: Recent
+    },
+    {
+        path: "/polibius",
+        name: "Polibius",
+        component: Recent
+    },
+    {
+        path: "/shift",
+        name: "Shift",
+        component: Recent
+    },
+    {
         path: "/nok",
         name: "Nok",
         component: Nok,

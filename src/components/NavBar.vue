@@ -5,23 +5,26 @@ import { RouterLink } from 'vue-router';
 
 <template>
     <div class="navBar-cont">
-        <h2 class="navBar-cont-user"> <img src="../assets/Generic avatar.svg">Nick</h2>
+        <h1 class="navBar-cont-user">CryptoCalc</h1>
         <div class="navBar-cont-routes">
-            <h2>CALCULATION</h2>
+            <h2>Операции</h2>
             
-            <RouterLink to="/nok"><div class="text"> <img class="icon" src="../assets/Box.svg">Nok</div></RouterLink>
-            <RouterLink to="/nod"><div class="text"> <img class="icon" src="../assets/Octagon.svg">Nod</div></RouterLink>
-            <RouterLink to="/abs"><div class="text "> <img class="icon" src="../assets/Cpu.svg">Abs</div></RouterLink>
-            <h2>RESULTS</h2>
-            <RouterLink to="/recent"><div class="text"> <img class="icon" src="../assets/Rotate ccw.svg">Recent</div></RouterLink>
+            <RouterLink to="/nok"><div class="text"> <img class="icon" src="../assets/Box.svg">Нок</div></RouterLink>
+            <RouterLink to="/nod"><div class="text"> <img class="icon" src="../assets/Octagon.svg">Нод</div></RouterLink>
+            <RouterLink to="/abs"><div class="text "> <img class="icon" src="../assets/Cpu.svg">Модуль</div></RouterLink>
+            <h2>Шифры</h2>
+            <RouterLink to="/atbash"><div class="text"> <img class="icon" src="../assets/Box.svg">Атбаш</div></RouterLink>
+            <RouterLink to="/caesar"><div class="text"> <img class="icon" src="../assets/Octagon.svg">Цезарь</div></RouterLink>
+            <RouterLink to="/polibius"><div class="text "> <img class="icon" src="../assets/Cpu.svg">Полибий</div></RouterLink>
+            <RouterLink to="/shift"><div class="text "> <img class="icon" src="../assets/Cpu.svg">Сдвиг</div></RouterLink>
+            <h2>Результаты</h2>
+            <RouterLink to="/recent"><div class="text"> <img class="icon" src="../assets/Rotate ccw.svg">История</div></RouterLink>
         </div>
     </div>
 </template>
 
 <style scoped>
-.navBar-cont-routes h2{
-    margin-left: 10px;
-}
+
 a.router-link-active{
     position: relative;
     z-index: 1;
@@ -115,10 +118,11 @@ a.router-link-active::after {
     filter: brightness(0) saturate(100%) invert(36%) sepia(100%) saturate(400%) hue-rotate(270deg) brightness(100%) contrast(100%) ;
 }
 .navBar-cont-user{
+    font-weight: 500;
     display: flex;
     align-items: center;
     align-self: flex-start;
-    margin-left: 25px;
+    margin-bottom: 40px;
 }
 .navBar-cont-routes{
     align-self: flex-start;
@@ -126,8 +130,8 @@ a.router-link-active::after {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    height: 50%;
+    justify-content: center;
+    height: 80%;
     align-items: flex-start;
 }
 .icon{
@@ -137,6 +141,7 @@ a.router-link-active::after {
 }
 .text{
     padding-left: 25px;
+    font-weight: 500;
     height: 4rem;
     width: 100%;
     font-size: 1.5rem;
@@ -149,7 +154,8 @@ a{
     text-decoration: none;
 }
 h2{
-  font-weight: 500;
+  font-weight: 420;
+  margin-left: 5px;
 }
 .navBar-cont{
     justify-content: flex-start;
