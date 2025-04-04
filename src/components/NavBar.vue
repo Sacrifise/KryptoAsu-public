@@ -24,6 +24,29 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <style scoped>
+.navBar-cont-user::after{
+    content: "CryptoCalc";
+    color: #8958BE;
+    position: absolute;
+    top: 2.5px;
+    left: 0px;
+    z-index: -1;
+    transition: 0.2s;
+
+}
+.navBar-cont-user::before{
+    content: "CryptoCalc";
+    color: #d1a7ff;
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    z-index: -2;
+    transition: 0.2s;
+
+}
+.navBar-cont-user:hover::after, .navBar-cont-user:hover::before{
+    top:0px;
+}
 
 a.router-link-active{
     position: relative;
@@ -123,6 +146,8 @@ a.router-link-active::after {
     align-items: center;
     align-self: flex-start;
     margin-bottom: 40px;
+    position: relative;
+    z-index: 3;
 }
 .navBar-cont-routes{
     align-self: flex-start;
@@ -138,10 +163,14 @@ a.router-link-active::after {
     object-fit: cover;
     width: 25px;
     height: 25px;
+    margin-right: 3px;
 }
 .text{
-    padding-left: 25px;
-    font-weight: 500;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    padding-left: 30px;
+    font-weight: 700;
     height: 4rem;
     width: 100%;
     font-size: 1.5rem;
@@ -154,8 +183,14 @@ a{
     text-decoration: none;
 }
 h2{
-  font-weight: 420;
+  /* font-family: "Inter", sans-serif; */
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.8rem;
   margin-left: 5px;
+  color: #222;
 }
 .navBar-cont{
     justify-content: flex-start;
