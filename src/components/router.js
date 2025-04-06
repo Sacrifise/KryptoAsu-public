@@ -3,7 +3,6 @@ import Nok from "./screens/Nok.vue";
 import Abs from "./screens/Abs.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Recent from "./screens/Recent.vue";
-
 const routes = [
     {
         path: "/",

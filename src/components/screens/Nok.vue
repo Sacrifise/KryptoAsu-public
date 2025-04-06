@@ -6,7 +6,7 @@ import NavBar from '../NavBar.vue';
 <template>
   <div class="window">
     
-    <ContentComp type="Nok" url="/Operations/LCM"/>
+    <ContentComp type="Nok" url="/operations/lcm"/>
   </div>
 </template>
 

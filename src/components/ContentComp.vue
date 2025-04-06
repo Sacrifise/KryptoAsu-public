@@ -48,7 +48,6 @@ const variables = ref([]);
 const isPlusHidden = ref(false);
 const inputData = ref([])
 
-
 function createVar(){
     variables.value.push(String.fromCharCode(counter))
     counter += 1;
@@ -59,7 +58,7 @@ function submitForm(e){
     inputData.value = [];
     formSub.value.querySelectorAll("input").forEach((el) => inputData.value.push(el.value))
     inputData.value = inputData.value.filter((el) => el != "")
-    dataPostCall({value: Array.from(inputData.value)})
+    dataPostCall({elements: Array.from(inputData.value)})
 }
 
 async function dataPostCall(content) {
@@ -71,8 +70,8 @@ async function dataPostCall(content) {
         }
     
     
-    }).then(res => res.json()).then(json => console.log(json));
-    dataGetCall()
+    }).then(res => res.json()).then(json => renderResult(json.result));
+    // dataGetCall()
 }
 
 async function dataGetCall() {
@@ -85,6 +84,18 @@ async function dataGetCall() {
     setTimeout(() => resSub.value.classList.remove("name"), 1000)
 }
 
+async function renderResult(result){
+    console.log(result)
+    resSub.value.classList.remove("name")
+    resultData.value = result;
+    resSub.value.classList.add("name");
+    setTimeout(() => resSub.value.classList.remove("name"), 1000);
+    const item = JSON.parse(localStorage.getItem("recent")) || []
+    
+    item.push(result)
+    localStorage.setItem("recent", JSON.stringify(item))
+    console.log(localStorage)
+}
 
 
 watch(variables, (newValue) => {

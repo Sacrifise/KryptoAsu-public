@@ -6,7 +6,7 @@ import NavBar from '../NavBar.vue';
 <template>
   <div class="window">
     
-    <ContentComp type="Nod" url="/Operations/GCD"/>
+    <ContentComp type="Nod" url="/operations/gcd"/>
   </div>
 </template>
 
