@@ -52,13 +52,18 @@ try{
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
+    overflow-y: scroll;
+    max-height: 70vh;
+    scrollbar-width: thin;
+    scrollbar-color: #debcff rgba(0, 0, 0, 0);
 }
 .history-item{
     align-items: center;
     display: flex;
     border-radius: 25px;
-    width: 100%;
+    max-width: fit-content;
     padding: 10px;
     box-sizing: border-box;
     color: white;
@@ -76,7 +81,6 @@ try{
 
 .history-item-text{
     margin: 5px;
-    width: 75%;
     display: flex;
     justify-content: center;
     font-size: 1.3rem;
