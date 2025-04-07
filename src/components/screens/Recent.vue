@@ -1,22 +1,10 @@
 <script setup>
-import ContentComp from '../ContentComp.vue';
-import NavBar from '../NavBar.vue';
-
-try{
-const results = JSON.parse(localStorage.getItem("recent"))
-results.forEach((item) => console.log(`Предыдущий ответ: ${item}`))
-}catch(err){
-  console.log(err)
-}
+import RecentCard from '../RecentCard.vue';
 </script>
 
 <template>
   <div class="window">
-    
-    <ContentComp type="Recent"/>
-    <!-- <div v-for="item, index in results" :key="index">
-      Прошлый ответ:{{ item }}
-    </div> -->
+    <RecentCard/>
   </div>
 </template>
 
