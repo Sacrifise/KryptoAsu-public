@@ -12,22 +12,22 @@ const routes = [
     {
         path: "/atbash",
         name: "Atbash",
-        component: Recent
+        component: Nod
     },
     {
         path: "/caesar",
         name: "Caesar",
-        component: Recent
+        component: Nod
     },
     {
         path: "/polibius",
         name: "Polibius",
-        component: Recent
+        component: Nod
     },
     {
         path: "/shift",
         name: "Shift",
-        component: Recent
+        component: Nod
     },
     {
         path: "/nok",

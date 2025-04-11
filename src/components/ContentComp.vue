@@ -70,29 +70,19 @@ async function dataPostCall(content) {
         }
     
     
-    }).then(res => res.json()).then(json => renderResult(json.result));
-    // dataGetCall()
+    }).then(res => res.json()).then(json => renderResult(json));
 }
 
-async function dataGetCall() {
-    resSub.value.classList.remove("name")
-    try {
-        await fetch('http://localhost:8000/GET').then((el) => el.json()).then((e) => {resultData.value = e.results; resSub.value.classList.add("name")});
-    } catch (error) {
-        console.error('Error:', error);
-    }
-    setTimeout(() => resSub.value.classList.remove("name"), 1000)
-}
 
-async function renderResult(result){
-    console.log(result)
+async function renderResult(data){
+    console.log(data.result)
     resSub.value.classList.remove("name")
-    resultData.value = result;
+    resultData.value = data.result;
     resSub.value.classList.add("name");
     setTimeout(() => resSub.value.classList.remove("name"), 1000);
     const item = JSON.parse(localStorage.getItem("recent")) || []
     
-    item.push(result)
+    item.push(data)
     localStorage.setItem("recent", JSON.stringify(item))
     console.log(localStorage)
 }

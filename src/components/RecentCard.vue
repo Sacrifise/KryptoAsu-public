@@ -4,21 +4,26 @@
             <h2>Прошлые Операции</h2>
             <div class="recent-cont-history">
                 <div class="history-item" v-for="item, index in results" :key="index">
-                    <h3>{{ index+1 }}: Ответ</h3> <div class="history-item-text">{{ item }}</div>
+                    <h3>✔️ {{ index+1 }}:НОД({{ item.value.join(", ") }}) -> </h3> <div class="history-item-text">{{ item.result }}</div>
                 </div>
             </div>
+            <button @click = "clearStorage()">Отчистить историю</button>
         </div>
     </div>
 </template>
 
 <script setup>
-import { Text } from 'vue';
+import { Text, ref } from 'vue';
 
+function clearStorage(){
+    localStorage.setItem("recent", JSON.stringify([]));
+    results.value = [];
+}
+const results = ref([]);
 
-let results;
 try{
-     results = JSON.parse(localStorage.getItem("recent")).reverse()
-    results.forEach((item, index) => console.log(`${index+1}: ${item}` ))
+     results.value = JSON.parse(localStorage.getItem("recent")).reverse()
+    results.value.forEach((item, index) => console.log(`${index+1}: ${item.result}` ))
 }catch(err){
   console.log(err)
 }
@@ -36,8 +41,10 @@ try{
     height: 90vh;
     box-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.25);
     border-radius: 30px;
+    box-sizing: border-box;
 }
 .recent{
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     width: 85vw;
@@ -47,36 +54,58 @@ try{
 .recent-cont-history{
     margin-top: 20px;
     box-sizing: border-box;
-    width: auto;
-    min-width: 15%;
+    width: 70%;
+    max-width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
     overflow-y: scroll;
-    max-height: 70vh;
-    scrollbar-width: thin;
-    scrollbar-color: #debcff rgba(0, 0, 0, 0);
+    max-height: 65vh;
 }
-.history-item{
-    align-items: center;
-    display: flex;
-    border-radius: 25px;
-    max-width: fit-content;
-    padding: 10px;
-    box-sizing: border-box;
+.recent-cont button{
+    margin-top: 3rem;
+    font-size: 1.2rem;
     color: white;
-    background-color: #ffacdb;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 5px 0 0 rgb(255, 155, 212);
+    width: 20%;
+    height: 8%;
+    background: linear-gradient(90deg, rgba(204,155,255,1) 0%, rgba(214,177,253,1) 100%);
+    box-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.25);
+    border: none;
+    border-radius: 30px;
     transition: 0.3s;
 }
-.history-item:hover{
-    box-shadow: 0 8px 0 0 #debcff;
-    background-color: #cd9bff;
+.recent-cont button:hover{
+    border-radius: 10px;
 }
+.recent-cont button:active{
+    filter: brightness(0.7);
+}
+.recent-cont-history::-webkit-scrollbar{
+    background-color: rgb(238, 200, 255);
+    scrollbar-width: thin;
+    border-radius: 10px;
+}
+.recent-cont-history::-webkit-scrollbar-thumb{
+    background-color: #cda2f9;
+    border-radius: 10px;
+}
+.history-item{
+    width: 60%;
+    align-items: center;
+    display: flex;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    color: black;
+    background-color: white;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.073);
+    flex-wrap: wrap;
+}
+
 
 
 .history-item-text{
