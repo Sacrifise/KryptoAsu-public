@@ -19,6 +19,7 @@ async def greater_common_divisor(
     result = reduce(gcd, response.elements)
     return {
         "success": True,
+        "type": "НОД",
         "value": response.elements,
         "result": result
     }
@@ -33,6 +34,7 @@ async def least_common_multiple(
     result = reduce(lcm, response.elements)
     return {
         "success": True,
+        "type": "НОК",
         "value": response.elements,
         "result": result
     }
@@ -48,12 +50,14 @@ async def module_comprasion(
     if result is None:
         return {
             "success": True,
+            "type": "модуль",
             "value": response.elements,
             "result": "Решений нет"
         }
     else:
         return {
             "success": True,
+            "type": "модуль",
             "value": response.elements,
             "result": result
         }
