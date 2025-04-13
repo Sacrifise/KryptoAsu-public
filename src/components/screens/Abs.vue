@@ -6,7 +6,7 @@ import NavBar from '../NavBar.vue';
 <template>
   <div class="window">
     
-    <ContentComp type="Abs" url="/Operations/ABS"/>
+    <ContentComp type="Abs" url="/operations/module"/>
   </div>
 </template>
 

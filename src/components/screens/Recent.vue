@@ -1,12 +1,10 @@
 <script setup>
-import ContentComp from '../ContentComp.vue';
-import NavBar from '../NavBar.vue';
+import RecentCard from '../RecentCard.vue';
 </script>
 
 <template>
   <div class="window">
-    
-    <ContentComp type="Recent"/>
+    <RecentCard/>
   </div>
 </template>
 
