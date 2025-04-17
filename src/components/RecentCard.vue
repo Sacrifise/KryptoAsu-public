@@ -4,7 +4,7 @@
             <h2>Прошлые Операции</h2>
             <div class="recent-cont-history">
                 <div class="history-item" v-for="item, index in results" :key="index">
-                    <h3>✔️ {{ index+1 }}:{{item.type}}({{ item.value.join(", ") }}) -> </h3> <div class="history-item-text">{{ item.result }}</div>
+                    <h3>✔️ {{ index+1 }}:{{item.type}}({{item.value}}{{item.operation ? " " + item.operation : ""}}{{item.shift ? " сдвиг: " + item.shift : "" }}) -> </h3> <div class="history-item-text">{{ item.result }}</div>
                 </div>
             </div>
             <button @click = "clearStorage()">Отчистить историю</button>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { Text, ref } from 'vue';
+import { ref } from 'vue';
 
 function clearStorage(){
     localStorage.setItem("recent", JSON.stringify([]));
