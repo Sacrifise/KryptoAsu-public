@@ -18,7 +18,7 @@ def modular_inverse(a, m):
 
 def solve_congruence(elements):
     a, b, m = elements[0], elements[1], elements[2]
-    """Решает уравнение сравнения a*x ≡ b (mod m)."""
+    """Решает уравнение сравнения a*x ≡ b (mod m). """
     d = gcd(a, m)
     if b % d != 0:
         return None  
