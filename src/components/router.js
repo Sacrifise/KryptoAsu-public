@@ -3,6 +3,9 @@ import Nok from "./screens/Nok.vue";
 import Abs from "./screens/Abs.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Recent from "./screens/Recent.vue";
+import Atbash from "./screens/Atbash.vue";
+import Caesar from "./screens/Caesar.vue";
+import Polibius from "./screens/Polibius.vue";
 const routes = [
     {
         path: "/",
@@ -12,22 +15,17 @@ const routes = [
     {
         path: "/atbash",
         name: "Atbash",
-        component: Nod
+        component: Atbash
     },
     {
         path: "/caesar",
         name: "Caesar",
-        component: Nod
+        component: Caesar
     },
     {
         path: "/polibius",
         name: "Polibius",
-        component: Nod
-    },
-    {
-        path: "/shift",
-        name: "Shift",
-        component: Nod
+        component: Polibius
     },
     {
         path: "/nok",
