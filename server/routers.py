@@ -71,7 +71,7 @@ async def module_comprasion(
 async def cifer_atbash(
     response: schemas.AtbashCifer
 ):
-    answer = cifers.atbash_cifer(response.text)
+    answer = cifers.atbash_cifer(response.text.lower())
     if response.operation == "encryption":
         return {
             "success": True,
@@ -96,7 +96,7 @@ async def cifer_atbash(
 async def cifer_caesar(
     response: schemas.CaesarCifer
 ):
-    answer = cifers.caesar_cifer(response.text, response.shift )
+    answer = cifers.caesar_cifer(response.text.lower(), response.shift )
     
     if response.operation == "encryption":
         return {
@@ -126,7 +126,7 @@ async def cifer_atbash(
 ):
     
     if response.operation == "encryption":
-        answer = cifers.encrypt_polybius_cipher(response.text)
+        answer = cifers.encrypt_polybius_cipher(response.text.lower())
         return {
             "success": True,
             "type": "Полибий",
@@ -135,7 +135,7 @@ async def cifer_atbash(
             "result": answer
         }
     elif response.operation == "decryption":
-        answer = cifers.decrypt_polybius_cipher(response.text)
+        answer = cifers.decrypt_polybius_cipher(response.text.lower())
         return {
             "success": True,
             "type": "Полибий",
