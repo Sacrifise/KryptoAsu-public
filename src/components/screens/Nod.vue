@@ -1,12 +1,12 @@
 <script setup>
-import ContentComp from '../ContentComp.vue';
+import ContentComp2 from '../ContentComp2.vue';
 import NavBar from '../NavBar.vue';
 </script>
 
 <template>
   <div class="window">
     
-    <ContentComp type="Nod" url="/operations/gcd"/>
+    <ContentComp2 type="Nod" url="/operations/gcd"/>
   </div>
 </template>
 
