@@ -80,7 +80,7 @@ class LeastCommonMultiple(BaseModel):
     @field_validator("elements")
     def list_crucial_condition(cls, elem):
         if len(elem) < 2:
-           raise ValueError('Список должен содержать минимум два элемента.')
+           raise ValueError('Для вычисления НОК необходимо минимум два элемента.')
         for num in elem:  
             if not isinstance(num, int) or num < 0:  
                 raise ValueError('Значения должны быть целыми положительными числами!')  
@@ -106,7 +106,7 @@ class GreaterCommonDivisor(BaseModel):
     @field_validator("elements")
     def list_crucial_condition(cls, elem):
         if len(elem) < 2:
-           raise ValueError('Список должен содержать минимум два элемента.')
+           raise ValueError('Для вычисления НОД необходимо минимум два элемента.')
         for num in elem:  
             if not isinstance(num, int) or num < 0:  
                 raise ValueError('Значения должны быть целыми положительными числами!')  
