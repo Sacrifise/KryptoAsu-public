@@ -90,6 +90,7 @@ class LeastCommonMultiple(BaseModel):
 class ModuleСomparison(BaseModel):
     elements: List[int]
     
+    
     @field_validator("elements")
     def list_crucial_condition(cls, elem):
         if len(elem) < 3:
