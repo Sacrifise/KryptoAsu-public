@@ -47,19 +47,21 @@ async def least_common_multiple(
 async def module_comprasion(
     response: schemas.ModuleСomparison
 ):
-    result = solve_congruence(response.elements)
+    result, solution = solve_congruence(response.elements, " ")
     if result is None:
         return {
             "success": True,
             "type": "Модуль",
             "value": response.elements,
-            "result": "Решений нет"
+            "solution": solution,
+            "result": "Решений нет\n"
         }
     else:
         return {
             "success": True,
             "type": "Модуль",
             "value": response.elements,
+            "solution": solution,
             "result": result
         }
         
